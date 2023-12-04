@@ -49,11 +49,12 @@ body {
   margin: 0;
   padding: 0;
   color: var(--color-dark-500);
+
   display: flex;
   flex-flow: column;
 }
 
-.main{
+.main {
   flex: 1 1 auto;
 }
 
@@ -110,6 +111,7 @@ ol {
 
 a {
   color: var(--color-dark-500);
+  text-decoration: none;
 
   &:focus {
     opacity: .8;
