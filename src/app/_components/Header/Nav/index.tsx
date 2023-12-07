@@ -5,27 +5,18 @@ import Link from 'next/link'
 
 import { Header as HeaderType } from '../../../../payload/payload-types'
 import { useAuth } from '../../../_providers/Auth'
+import { Button } from '../../Button'
 import { CartLink } from '../../CartLink'
 import { CMSLink } from '../../Link'
 
 import classes from './index.module.scss'
-import { Button } from '../../Button'
 
 export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
   const navItems = header?.navItems || []
   const { user } = useAuth()
 
   return (
-    <nav
-      className={[
-        classes.nav,
-        // fade the nav in on user load to avoid flash of content and layout shift
-        // Vercel also does this in their own website header, see https://vercel.com
-        user === undefined && classes.hide,
-      ]
-        .filter(Boolean)
-        .join(' ')}
-    >
+    <nav className={[classes.nav, user === undefined && classes.hide].filter(Boolean).join(' ')}>
       {navItems.map(({ link }, i) => {
         return <CMSLink key={i} {...link} appearance="none" />
       })}
@@ -40,7 +31,6 @@ export const HeaderNav: React.FC<{ header: HeaderType }> = ({ header }) => {
           onClick={() => (window.location.href = '/login')}
         />
       )}
-      {/* if user exist show their cart link */}
       {user && <CartLink />}
     </nav>
   )
